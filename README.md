@@ -7,7 +7,7 @@ Requirements:
 * RDKIT, http://www.rdkit.org
 
 ```
-pip install git:https://github.com/3D-e-Chem/rdkit-react.git
+pip install git+https://github.com/3D-e-Chem/rdkit-react.git
 ```
 
 # Usage
