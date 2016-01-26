@@ -44,12 +44,16 @@ def main(argv=sys.argv[1:]):
         reactant.SetProp("_Name", "{}_frag1".format(reactant_name))
         writer.write(reactant)
         frag_counter = 2
+        prods = {}
         for reaction in reactions:
             products = reaction.RunReactants([reactant])
             for product in products:
                 frags = (Chem.GetMolFrags(product[0], asMols=True))
                 for frag in frags:
                     prod = copy.copy(frag)
-                    prod.SetProp("_Name", "{}_frag{}".format(reactant_name, frag_counter))
-                    writer.write(prod)
-                    frag_counter += 1
+                    prods[Chem.MolToSmiles(prod)] = prod
+        for prod in prods.values():
+            prod.SetProp("_Name", "{}_frag{}".format(reactant_name, frag_counter))
+            writer.write(prod)
+            frag_counter += 1
+
